@@ -2,10 +2,10 @@
   div
     div.main-img.animated.swing
       img(src="../assets/images/whist.svg")
-    ul.nav-list
+    ul.nav-list.animated.fadeIn
       li(v-for="item in navItems").nav-item
         router-link(:to="{ name: item.component }").nav-link {{ item.name }}
-    div.version v0.1.0
+    div.version v0.1.3
 </template>
 
 <script>
