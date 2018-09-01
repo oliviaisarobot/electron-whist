@@ -1,7 +1,8 @@
 <template lang="pug">
   div
     header-component
-    div High scores
+    div.content
+      div High scores
     footer-component
 </template>
 

@@ -1,6 +1,6 @@
 {
   "name": "electron-whist",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Olivia Gardiner <oliv.gardiner@gmail.com>",
   "description": "An electron-vue project",
   "license": "MIT",
@@ -57,10 +57,11 @@
   "dependencies": {
     "axios": "^0.16.1",
     "pug": "^2.0.3",
-    "vue": "^2.3.3",
+    "semver": "^5.5.1",
+    "vue": "^2.4.4",
     "vue-electron": "^1.0.6",
     "vue-router": "^2.5.3",
-    "vuex": "^2.3.1"
+    "vuex": "^3.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.25.0",

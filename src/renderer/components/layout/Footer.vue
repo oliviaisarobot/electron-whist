@@ -6,13 +6,7 @@
 </template>
 
 <script>
-  export default {
-    computed: {
-      imgUrl () {
-
-      }
-    }
-  }
+  export default {}
 </script>
 
 <style>
@@ -20,6 +14,7 @@
     bottom: 40px;
     left: 40px;
     position: absolute;
+    z-index: 100;
   }
 
   .router-link {

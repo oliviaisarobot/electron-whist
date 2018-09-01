@@ -5,6 +5,7 @@
     ul.nav-list
       li(v-for="item in navItems").nav-item
         router-link(:to="{ name: item.component }").nav-link {{ item.name }}
+    div.version v0.1.0
 </template>
 
 <script>
@@ -36,10 +37,25 @@
     justify-content: center;
     list-style-type: none;
     margin-top: 50px;
+    padding-left: 0;
+    transition: .3s ease;
   }
 
   .nav-link {
     color: white;
     font-size: 18px;
+    transition: .3s ease;
+  }
+
+  .nav-link:hover {
+    color: #ec008c;
+  }
+
+  .version {
+    bottom: 50px;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    width: 100vw;
   }
 </style>

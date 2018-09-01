@@ -1,7 +1,6 @@
-<template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+<template lang="pug">
+  div#app
+    router-view
 </template>
 
 <script>
@@ -13,7 +12,14 @@
 <style>
   html, body {
     margin: 0;
+    overflow: hidden;
     padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   html {
@@ -29,5 +35,18 @@
 
   a {
     text-decoration: none;
+  }
+
+  *:focus {
+	   outline: none;
+	}
+
+  *::-moz-focus-inner {
+	   border: none;
+	}
+
+  .content {
+    margin: 0 auto;
+    width: 60vw;
   }
 </style>

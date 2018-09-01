@@ -1,7 +1,8 @@
 <template lang="pug">
   div
     header-component
-    div Rules
+    div.content
+      div Rules
     footer-component
 </template>
 
