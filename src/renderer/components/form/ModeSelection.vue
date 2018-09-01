@@ -1,11 +1,11 @@
 <template lang="pug">
   div.select-container.d-flex
-    label(for="select") Game type:
+    label(for="select") Game mode:
     div.d-flex
       div(
         @click="switchType('previous')"
         ).modify.left
-      div.select {{ gameType.name }}
+      div.select {{ selectedMode.name }}
       div(
         @click="switchType('next')"
         ).modify.right
@@ -17,38 +17,25 @@
   export default {
     computed: {
       ...mapState({
-        gamelist: (state) => state.game.gamelist
+        modes: (state) => state.game.modes,
+        selectedMode: (state) => state.game.selectedMode
       })
     },
-    data () {
-      return {
-        gameType: {}
-      }
-    },
     methods: {
-      changed () {
-        this.$emit('change', this.value.code)
-      },
-      getGameType () {
-        this.gamelist.forEach((game) => {
-          if (game.code === this.$store.state.game.code) this.gameType = game
-        })
-      },
       switchType (direction) {
-        let [i, code, _this] = [this.gamelist.indexOf(this.gameType), this.gameType.code, this]
+        let [i, mode, _this] = [this.modes.indexOf(this.selectedMode), this.selectedMode, this]
         if (direction === 'previous') {
-          if (i === 0) code = _this.gamelist[_this.gamelist.length - 1].code
-          else code = _this.gamelist[i - 1].code
+          if (i === 0) mode = _this.modes[_this.modes.length - 1]
+          else mode = _this.modes[i - 1]
         } else {
-          if (i === _this.gamelist.length - 1) code = _this.gamelist[0].code
-          else code = _this.gamelist[i + 1].code
+          if (i === _this.modes.length - 1) mode = _this.modes[0]
+          else mode = _this.modes[i + 1]
         }
-        this.$store.dispatch('game/setGameType', code)
-        this.getGameType()
+        this.$store.commit('game/SET_GAME_MODE', mode)
       }
     },
     created () {
-      this.getGameType()
+      this.$store.commit('game/SET_GAME_MODE', this.modes[0])
     }
   }
 </script>

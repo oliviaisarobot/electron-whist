@@ -20,6 +20,11 @@ export default new Router({
       component: require('@/components/game/Setup').default
     },
     {
+      path: 'game/score',
+      name: 'game-score',
+      component: require('@/components/game/Score').default
+    },
+    {
       path: 'settings/highscores',
       name: 'high-scores',
       component: require('@/components/settings/HighScores').default

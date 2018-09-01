@@ -1,7 +1,7 @@
 {
   "code": "a01",
-  "name": "Rikiki Ascending",
-  "description": "Players bid on exactly how many tricks they will take, going too high or too low is penalized. Ascending variant with 15 rounds.",
+  "name": "Rikiki",
+  "description": "In the Rikiki game type, players bid on exactly how many tricks they will take, going too high or too low is penalized.",
   "player_count": {
     "min": 2,
     "max": 6
@@ -9,7 +9,5 @@
   "bid": true,
   "penalty": true,
   "pair": false,
-  "perma_trump": false,
-  "round_count": 15,
-  "type": "ascending"
+  "perma_trump": false
 }

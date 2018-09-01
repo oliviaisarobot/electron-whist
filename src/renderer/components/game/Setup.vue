@@ -1,8 +1,9 @@
 <template lang="pug">
   div
     header-component
-    div.content
-      selection-component.space-after
+    div.content.animated.fadeIn
+      rule-selection-component.space-after
+      mode-selection-component.space-after
       counter-component(
         :min="ruleset.player_count.min"
         :max="ruleset.player_count.max"
@@ -21,7 +22,8 @@
   import FooterComponent from '@/components/layout/Footer'
   import HeaderComponent from '@/components/layout/Header'
   import CounterComponent from '@/components/form/Counter'
-  import SelectionComponent from '@/components/form/Selection'
+  import ModeSelectionComponent from '@/components/form/ModeSelection'
+  import RuleSelectionComponent from '@/components/form/RuleSelection'
   import { mapState } from 'vuex'
 
   export default {
@@ -29,7 +31,8 @@
       FooterComponent,
       HeaderComponent,
       CounterComponent,
-      SelectionComponent
+      ModeSelectionComponent,
+      RuleSelectionComponent
     },
     computed: {
       ...mapState({
@@ -42,13 +45,13 @@
         this.$store.dispatch('game/getRules')
       },
       setPlayers (e) {
-        this.$store.commit('game/RESET_PLAYERS')
+        this.$store.commit('game/CLEAR_PLAYERS')
         for (let i = 1; i <= e; i++) {
           this.$store.commit('game/SET_PLAYER', 'Player ' + i)
         }
       },
       startGame () {
-        console.log('START_GAME')
+        this.$router.push({ name: 'game-score' })
       }
     },
     created () {

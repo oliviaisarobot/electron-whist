@@ -16,6 +16,7 @@
           { name: 'New game', component: 'game-setup' },
           { name: 'High scores', component: 'high-scores' },
           { name: 'Rules', component: 'rules' }
+          // { name: 'Exit', component: 'rules' }
         ]
       }
     }

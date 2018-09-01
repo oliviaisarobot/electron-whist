@@ -1,15 +1,13 @@
 {
   "code": "a02",
-  "name": "Rikiki Descending",
-  "description": "Players bid on exactly how many tricks they will take, going too high or too low is penalized. Descending variant with 15 rounds.",
+  "name": "Bid Whist",
+  "description": "In the Bid Whist game type, players bid on exactly how many tricks they will take.",
   "player_count": {
     "min": 2,
     "max": 6
   },
   "bid": true,
-  "penalty": true,
+  "penalty": false,
   "pair": false,
-  "perma_trump": false,
-  "round_count": 15,
-  "type": "descending"
+  "perma_trump": false
 }
