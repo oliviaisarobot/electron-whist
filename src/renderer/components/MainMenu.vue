@@ -5,7 +5,7 @@
     ul.nav-list.animated.fadeIn
       li(v-for="item in navItems").nav-item
         router-link(:to="{ name: item.component }").nav-link {{ item.name }}
-    div.version v0.1.3
+    div.version v0.2.1
 </template>
 
 <script>

@@ -48,6 +48,7 @@
     computed: {
       ...mapState({
         code: (state) => state.game.code,
+        players: (state) => state.game.players,
         ruleset: (state) => state.game.ruleset
       })
     },
@@ -56,10 +57,8 @@
         this.$store.dispatch('game/getRules')
       },
       setPlayers (e) {
-        this.$store.commit('game/CLEAR_PLAYERS')
-        for (let i = 1; i <= e; i++) {
-          this.$store.commit('game/SET_PLAYER', { name: 'Player ' + i, index: i })
-        }
+        if (e < this.players.length) this.$store.commit('game/DELETE_PLAYER')
+        else if (e > this.players.length) this.$store.commit('game/SET_PLAYER', 'Player ' + e)
       },
       startGame () {
         this.$router.push({ name: 'game-score' })

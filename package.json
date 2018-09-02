@@ -1,6 +1,6 @@
 {
   "name": "electron-whist",
-  "version": "0.1.3",
+  "version": "0.2.1",
   "author": "Olivia Gardiner <oliv.gardiner@gmail.com>",
   "description": "An electron-vue project",
   "license": "MIT",

@@ -2,7 +2,7 @@
   div
     header
       div.h5 {{ ruleset.name }}
-    div.content
+    div.content.animated.fadeIn
       div(v-if="!gameData.introRead").animated.fadeIn
         intro-component
       div(v-else).animated.fadeIn

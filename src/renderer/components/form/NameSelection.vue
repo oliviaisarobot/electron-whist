@@ -16,7 +16,7 @@
     methods: {
       nameChange (e, i) {
         console.log(e)
-        this.$store.commit('game/SET_PLAYER', { name: e.target.value, index: i })
+        this.$store.commit('game/RENAME_PLAYER', { name: e.target.value, index: i })
       }
     }
   }

@@ -19,6 +19,9 @@ const mutations = {
   CLEAR_PLAYERS (state) {
     state.players = []
   },
+  DELETE_PLAYER (state) {
+    state.players.pop()
+  },
   INIT_GAME (state) {
     state.gameData = {
       introRead: false,
@@ -29,6 +32,9 @@ const mutations = {
   INTRO_READ (state) {
     state.gameData.introRead = true
   },
+  RENAME_PLAYER (state, data) {
+    state.players[data.index] = data.name
+  },
   RESET_PLAYERS (state) {
     state.players = []
     for (let i = 1; i <= state.ruleset.player_count.min; i++) {
@@ -36,7 +42,7 @@ const mutations = {
     }
   },
   SET_PLAYER (state, data) {
-    state.players[data.index] = data.name
+    state.players.push(data)
   },
   SET_GAME_MODE (state, mode) {
     state.selectedMode = mode
