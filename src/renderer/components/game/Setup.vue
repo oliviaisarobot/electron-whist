@@ -4,7 +4,7 @@
     div.content.animated.fadeIn
       div(v-if="editNames").animated.fadeIn
         name-selection-component
-        div.d-flex.center.buttons
+        div.d-flex.align-center.justify-center.buttons
           div(@click="editNames = false").primary-button Done
       div(v-else).animated.fadeIn
         rule-selection-component.space-after
@@ -16,7 +16,7 @@
           name="player-counter"
           @change="setPlayers($event)"
           ).space-after
-        div.d-flex.center.buttons
+        div.d-flex.align-center.justify-center.buttons
           div(@click="editNames = true").secondary-button Edit names
           div(@click="startGame").primary-button Start game
     footer-component
@@ -73,48 +73,5 @@
 <style>
   .buttons {
     margin-top: 50px;
-  }
-
-  .center {
-    justify-content: center;
-  }
-
-  .d-flex {
-    align-items: center;
-    display: flex;
-  }
-
-  .primary-button {
-    border: 2px solid #ffff33;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    height: 50px;
-    line-height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 5px;
-    transition: .3s ease;
-  }
-
-  .primary-button:hover {
-    border: 2px solid #ec008c;
-    transition: .3s ease;
-  }
-
-  .secondary-button {
-    cursor: pointer;
-    padding-left: 20px;
-    padding-right: 20px;
-    transition: .3s ease;
-  }
-
-  .secondary-button:hover {
-    color: #ec008c;
-    transition: .3s ease;
-  }
-
-  .space-after {
-    margin-bottom: 15px;
   }
 </style>

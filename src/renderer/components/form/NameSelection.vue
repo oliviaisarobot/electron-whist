@@ -27,17 +27,6 @@
     text-align: center;
   }
 
-  .input {
-    background: none;
-    border: 2px solid #27aae1;
-    border-radius: 10px;
-    color: white;
-    font-family: inherit;
-    font-size: 18px;
-    padding: 10px;
-    text-align: center;
-  }
-
   .space-after {
     margin-bottom: 15px;
   }

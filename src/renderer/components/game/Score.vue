@@ -1,12 +1,26 @@
 <template lang="pug">
-  div
-    header
-      div.h5 {{ ruleset.name }}
+  div.screen
     div.content.animated.fadeIn
       div(v-if="!gameData.introRead").animated.fadeIn
         intro-component
       div(v-else).animated.fadeIn
-        div The game is here!
+        div.round-counter
+          img(src="../../assets/images/rounds.svg").round-counter-image
+          div.round-text.animated.flipInX
+            span {{ currentRound }}
+        div(v-if="currentRoundData.trump").trump-indicator.animated.lightSpeedIn
+          div
+            span {{ currentRoundData.trump }}
+        div.main-board
+          div(v-if="stage === 'set_trump'").center-text
+            set-trump(@set="setTrump($event)")
+          div(v-if="stage === 'set_bids'").center-text
+            set-bids(@set="stage = 'set_takes'")
+          div(v-if="stage === 'set_takes'").center-text
+            set_takes(@set="stage = 'round_end'")
+          div(v-if="stage === 'round_end'").center-text
+            div Display scores
+            div(@click="startNewRound").primary-button Next round
     footer
       div(@click="exitGame").secondary-button Exit game
 </template>
@@ -14,39 +28,84 @@
 <script>
   import HeaderComponent from '@/components/layout/Header'
   import IntroComponent from '@/components/game/Intro'
+  import SetBids from '@/components/form/SetBids'
+  import SetTakes from '@/components/form/SetTakes'
+  import SetTrump from '@/components/form/SetTrump'
   import { mapState } from 'vuex'
 
   export default {
     components: {
       HeaderComponent,
-      IntroComponent
+      IntroComponent,
+      SetBids,
+      SetTakes,
+      SetTrump
     },
     computed: {
       ...mapState({
         gameData: (state) => state.game.gameData,
+        roundData: (state) => state.game.gameData.rounds,
         ruleset: (state) => state.game.ruleset,
         mode: (state) => state.game.selectedMode
-      })
+      }),
+      currentRound () {
+        return this.gameData.currentRound
+      },
+      currentRoundData () {
+        return this.roundData[this.currentRound - 1]
+      }
     },
     data () {
-      return {}
+      return {
+        stage: 'intro'
+      }
     },
     methods: {
       exitGame () {
         // TODO: prompt exit
         this.$router.push({ name: 'main-menu' })
+      },
+      getCurrentStage () {
+        if (this.roundData.length === 0) this.startNewRound()
+        else {
+          if (this.currentRoundData && this.currentRoundData.trump === null) {
+            if (this.currentRound === 1 || !this.ruleset.perma_trump) this.stage = 'set_trump'
+            else this.$store.commit('game/SET_TRUMP', { round: this.currentRound, trump: this.roundData['1'].trump })
+          } else if (this.ruleset.bid && !this.currentRoundData.bids.isSet) {
+            this.stage = 'set_bids'
+          } else if (!this.currentRound.takes.isSet) {
+            this.stage = 'set_takes'
+          } else {
+            this.$store.commit('game/INCREMENT_ROUND_COUNTER')
+          }
+        }
+      },
+      setTrump (e) {
+        this.$store.commit('game/SET_TRUMP', { round: this.currentRound, name: e })
+      },
+      startNewRound () {
+        this.$store.commit('game/INIT_NEW_ROUND')
       }
     },
     created () {
       this.$store.commit('game/INIT_GAME')
+    },
+    watch: {
+      gameData: {
+        handler () {
+          console.log(this.stage)
+          // if (this.gameData.introRead && this.stage === 'intro')
+          this.getCurrentStage()
+        },
+        deep: true
+      }
     }
   }
 </script>
 
 <style>
-  .d-flex {
-    align-items: center;
-    display: flex;
+  .center-text {
+    text-align: center;
   }
 
   footer {
@@ -77,37 +136,35 @@
     font-weight: bold;
   }
 
-  .primary-button {
-    border: 2px solid #ffff33;
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 18px;
-    height: 50px;
-    line-height: 50px;
-    padding-left: 20px;
-    padding-right: 20px;
-    padding-top: 5px;
-    transition: .3s ease;
+  .round-counter-image, .round-text {
+    position: absolute;
+    height: 140px;
+    width: 140px;
   }
 
-  .primary-button:hover {
-    border: 2px solid #ec008c;
-    transition: .3s ease;
+  .round-counter {
+    left: 80px;
+    position: absolute;
+    top: 0px;
   }
 
-  .secondary-button {
-    cursor: pointer;
-    padding-left: 20px;
-    padding-right: 20px;
-    transition: .3s ease;
+  .round-text {
+    font-size: 48px;
+    margin-top: 25px;
+    text-align: center;
   }
 
-  .secondary-button:hover {
-    color: #ec008c;
-    transition: .3s ease;
+  .screen {
+    align-items: center;
+    display: flex;
+    height: 100vh;
+    justify-content: center;
   }
 
-  .space-after {
-    margin-bottom: 15px;
+  .trump-indicator {
+    position: absolute;
+    right: 80px;
+    top: 40px;
+    width: 140px;
   }
 </style>

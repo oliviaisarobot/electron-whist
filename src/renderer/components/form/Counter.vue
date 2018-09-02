@@ -1,7 +1,7 @@
 <template lang="pug">
   div.counter-container.d-flex
     label(v-if="label" for="name") {{ label }}
-    div.d-flex
+    div.d-flex.align-center
       div(
         :class="{ 'faded': value === min }"
         @click="decrement"
@@ -84,11 +84,6 @@
     padding: 10px;
     text-align: center;
     width: 25px;
-  }
-
-  .d-flex {
-    align-items: center;
-    display: flex;
   }
 
   .faded {

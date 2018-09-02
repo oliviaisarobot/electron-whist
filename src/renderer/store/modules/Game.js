@@ -22,11 +22,27 @@ const mutations = {
   DELETE_PLAYER (state) {
     state.players.pop()
   },
+  INCREMENT_ROUND_COUNTER (state) {
+    state.gameData.currentRound++
+  },
   INIT_GAME (state) {
     state.gameData = {
       introRead: false,
       currentRound: 1,
-      rounds: {}
+      rounds: []
+    }
+  },
+  INIT_NEW_ROUND (state) {
+    if (state.gameData.rounds) {
+      let roundData = {}
+      if (state.ruleset.bid) roundData.bids = {}; roundData.bids.isSet = false
+      roundData.takes = {}; roundData.takes.isSet = false
+      state.players.forEach((player) => {
+        if (state.ruleset.bid) roundData.bids[player] = 0
+        roundData.takes[player] = 0
+      })
+      roundData.trump = null
+      state.gameData.rounds.push(roundData)
     }
   },
   INTRO_READ (state) {
@@ -43,6 +59,9 @@ const mutations = {
   },
   SET_PLAYER (state, data) {
     state.players.push(data)
+  },
+  SET_TRUMP (state, data) {
+    state.gameData.rounds[data.round - 1].trump = data.name
   },
   SET_GAME_MODE (state, mode) {
     state.selectedMode = mode
