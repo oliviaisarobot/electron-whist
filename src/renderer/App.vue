@@ -153,4 +153,40 @@
   .text-center {
     text-align: center;
   }
+
+  table {
+    border: 1px solid #ff0099;
+    border-collapse: collapse;
+    margin: 0px 20px 5px 0px;
+  }
+
+  tbody {
+    background-color: rgba(0,0,0,0.8);
+  }
+
+  thead {
+    background-color: #ff0099;
+    border-radius: 10px;
+    color: #ffff33;
+  }
+
+  th {
+    padding: 5px 25px 0px 25px;
+  }
+
+  .background-even {
+    background-color: rgba(0,174,239,.2);
+  }
+
+  .border-bottom {
+    border-bottom: 1px solid #27aae1;
+  }
+
+  .border-right {
+    border-right: 1px solid #ff0099;
+  }
+
+  .ranking {
+    margin: 0px!important;
+  }
 </style>

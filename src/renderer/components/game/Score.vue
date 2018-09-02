@@ -22,14 +22,17 @@
             set-bids(@set="stage = 'set_takes'")
           div(v-if="stage === 'set_takes'").center-text.animated.slideInRight
             div(v-if="playing")
-              div You are playing! Have fun and let me know when you are ready to set the takes!
-              div Also display current bids and flahs scores here!
+              ranking-component(:bids="true").space-after-extra
               div(@click="playing = false").primary-button.d-inline-block Set takes
             div(v-else)
               set-takes(@set="stage = 'round_end'")
           div(v-if="stage === 'round_end'").center-text.animated.slideInRight
-            flash-scores.space-after
+            ranking-component.space-after-extra
             div(@click="nextRound").primary-button.d-inline-block Next round
+          div(v-if="stage === 'game_end'").center-text.animated.slideInRight
+            ranking-component.space-after-extra
+            div.d-flex.justify-center
+              span.winner ★ {{ winner }} has won the game! ★
       div(v-if="showScores", :class="{ 'fadeOut': !showScores }").mask.animated.fadeIn.d-flex.align-center.justify-center
         div(@click="showScores = false").score-close.animated.fadeIn.secondary-button Close
         div(:class="{ 'slideOutUp': !showScores }").score-board.animated.slideInDown
@@ -39,7 +42,7 @@
 </template>
 
 <script>
-  import FlashScores from '@/components/game/Flash'
+  import RankingComponent from '@/components/game/Ranking'
   import HeaderComponent from '@/components/layout/Header'
   import IntroComponent from '@/components/game/Intro'
   import ScoreBoard from '@/components/game/Board'
@@ -50,7 +53,7 @@
 
   export default {
     components: {
-      FlashScores,
+      RankingComponent,
       HeaderComponent,
       IntroComponent,
       ScoreBoard,
@@ -61,6 +64,7 @@
     computed: {
       ...mapState({
         gameData: (state) => state.game.gameData,
+        metaScore: (state) => state.game.gameData.metaScore,
         roundData: (state) => state.game.gameData.rounds,
         ruleset: (state) => state.game.ruleset,
         mode: (state) => state.game.selectedMode
@@ -70,6 +74,17 @@
       },
       currentRoundData () {
         return this.roundData[this.currentRound - 1]
+      },
+      winner () {
+        let [lead, scores, t] = [[], [], this]
+        Object.keys(this.metaScore).forEach((key) => {
+          scores.push(t.metaScore[key])
+        })
+        let max = Math.max.apply(null, scores)
+        Object.keys(this.metaScore).forEach((key) => {
+          if (t.metaScore[key] === max) lead.push(key)
+        })
+        return lead.length > 1 ? lead.join(' & ') : lead[0]
       }
     },
     data () {
@@ -97,6 +112,8 @@
             this.stage = 'set_bids'
           } else if (!this.currentRoundData.takes.isSet) {
             this.stage = 'set_takes'
+          } else if (this.currentRound === this.mode.round_count && this.stage === 'round_end') {
+            this.stage = 'game_end'
           } else {
             this.stage = 'round_end'
           }
@@ -245,11 +262,20 @@
     text-transform: uppercase;
   }
 
+  .space-after-extra {
+    margin-bottom: 50px;
+  }
+
   .trump-indicator {
     position: absolute;
     right: 80px;
     text-align: center;
     top: 20px;
     width: 140px;
+  }
+
+  .winner {
+    color: #ff0099;
+    font-size: 26px;
   }
 </style>

@@ -25,6 +25,8 @@
     },
     methods: {
       takesSet () {
+        // TODO: here validate if the total number of takes is equal to the cards in hand, display notification if it's incorrect
+        this.$store.dispatch('game/updateMetaScore')
         this.$store.commit('game/TAKE_ISSET', { round: this.currentRound })
         this.$emit('set')
       },

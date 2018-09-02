@@ -20,6 +20,21 @@ const mutations = {
   BID_ISSET (state, data) {
     state.gameData.rounds[data.round - 1].bids.isSet = true
   },
+  CALC_METASCORE (state, data) {
+    let diff = null
+    if (data.bids !== false) diff = Math.abs(data.takes - data.bids)
+    if (state.ruleset.penalty && state.ruleset.bid) { // if penalty is true, bids must also be true
+      diff === 0 ? state.gameData.metaScore[data.player] += 10 + (data.bids * 2)
+        : state.gameData.metaScore[data.player] -= (diff * 2)
+    }
+    if (!state.ruleset.penalty && state.ruleset.bid) { // no penalty, but correct bidding is rewarded
+      diff === 0 ? state.gameData.metaScore[data.player] += 10 + (data.bids * 2)
+        : state.gameData.metaScore[data.player] += data.takes * 2
+    }
+    if (!state.ruleset.penalty && !state.ruleset.bid) { // no penalty, and no bidding, highest take wins
+      state.gameData.metaScore[data.player] += data.takes * 2
+    }
+  },
   CLEAR_PLAYERS (state) {
     state.players = []
   },
@@ -33,8 +48,12 @@ const mutations = {
     state.gameData = {
       introRead: false,
       currentRound: 1,
+      metaScore: {},
       rounds: []
     }
+    state.players.forEach((player) => {
+      state.gameData.metaScore[player] = 0
+    })
   },
   INIT_NEW_ROUND (state) {
     if (state.gameData.rounds) {
@@ -101,6 +120,16 @@ const actions = {
       commit('SET_GAME_TYPE', code)
       dispatch('getRules')
     }
+  },
+  updateMetaScore ({state, commit}, data) {
+    let round = state.gameData.rounds[state.gameData.currentRound - 1]
+    state.players.forEach((player) => {
+      let bids = false
+      if (state.ruleset.bid) {
+        bids = round.bids[player]
+      }
+      commit('CALC_METASCORE', { player: player, bids: bids, takes: round.takes[player] })
+    })
   }
 }
 
