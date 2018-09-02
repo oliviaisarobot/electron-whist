@@ -36,7 +36,7 @@ const mutations = {
     }
   },
   SET_PLAYER (state, data) {
-    state.players.push(data)
+    state.players[data.index] = data.name
   },
   SET_GAME_MODE (state, mode) {
     state.selectedMode = mode
