@@ -1,6 +1,6 @@
 <template lang="pug">
   div
-    div.heading Select the trump card:
+    div.heading.h5 Select the trump card:
     div(v-for="suit in suits", :key="suit.name").trump-block
       span(@click="setTrump(suit.name)").secondary-button {{ suit.name }}
       //- TODO: visual representation of each card suit

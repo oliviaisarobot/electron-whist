@@ -22,10 +22,4 @@
     height: 100px;
     justify-content: center;
   }
-
-  .h5 {
-    color: #f9ed32;
-    font-size: 24px;
-    font-weight: bold;
-  }
 </style>

@@ -33,6 +33,20 @@
     width: 100vw;
   }
 
+  *::-webkit-scrollbar {
+    width: 10px!important;
+  }
+
+  *::-webkit-scrollbar-track {
+    background-color: rgba(39,170,225,0.3)!important;
+    border-radius: 5px;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #27aae1!important;
+    border-radius: 5px;
+  }
+
   a {
     text-decoration: none;
   }
@@ -58,6 +72,16 @@
     display: flex;
   }
 
+  .d-inline-block {
+    display: inline-block;
+  }
+
+  .h5 {
+    color: #f9ed32;
+    font-size: 24px;
+    font-weight: bold;
+  }
+
   .input {
     background: none;
     border: 2px solid #27aae1;
@@ -74,6 +98,12 @@
   .input:focus {
     border: 2px solid #ff0099;
     transition: .3s ease;
+  }
+
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
 
   .justify-center {
@@ -98,6 +128,12 @@
     transition: .3s ease;
   }
 
+  .scrollable {
+    text-align: center;
+    max-height: 340px;
+    overflow-y: auto!important;
+  }
+
   .secondary-button {
     cursor: pointer;
     padding-left: 20px;
@@ -112,5 +148,9 @@
 
   .space-after {
     margin-bottom: 15px;
+  }
+
+  .text-center {
+    text-align: center;
   }
 </style>

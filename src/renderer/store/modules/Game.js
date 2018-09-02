@@ -16,6 +16,9 @@ const state = {
 }
 
 const mutations = {
+  BID_ISSET (state, data) {
+    state.gameData.rounds[data.round - 1].bids.isSet = true
+  },
   CLEAR_PLAYERS (state) {
     state.players = []
   },
@@ -57,8 +60,14 @@ const mutations = {
       state.players.push('Player ' + i)
     }
   },
+  SET_BID (state, data) {
+    state.gameData.rounds[data.round - 1].bids[data.player] = data.value
+  },
   SET_PLAYER (state, data) {
     state.players.push(data)
+  },
+  SET_TAKE (state, data) {
+    state.gameData.rounds[data.round - 1].takes[data.player] = data.value
   },
   SET_TRUMP (state, data) {
     state.gameData.rounds[data.round - 1].trump = data.name
@@ -71,6 +80,9 @@ const mutations = {
   },
   SET_GAME_TYPE (state, data) {
     state.code = data
+  },
+  TAKE_ISSET (state, data) {
+    state.gameData.rounds[data.round - 1].takes.isSet = true
   }
 }
 

@@ -1,6 +1,9 @@
 <template lang="pug">
-  div.center
-    div(v-for="(value, index) in players", :key="index").space-after
+  div.scrollable
+    div(
+      v-for="(value, index) in players"
+      :key="index"
+      ).space-after
       input(type="text", :value="value" @change="nameChange($event, index)").input
 </template>
 
@@ -15,7 +18,6 @@
     },
     methods: {
       nameChange (e, i) {
-        console.log(e)
         this.$store.commit('game/RENAME_PLAYER', { name: e.target.value, index: i })
       }
     }
@@ -23,11 +25,20 @@
 </script>
 
 <style>
-  .center {
-    text-align: center;
-  }
-
   .space-after {
     margin-bottom: 15px;
+  }
+
+  .width-50 {
+    box-sizing: border-box;
+    display: inline-block;
+    /* margin-right: 20px; */
+    padding-left: 10px;
+    padding-right: 10px;
+    width: 50%;
+  }
+
+  .width-100 {
+    width: 100%;
   }
 </style>

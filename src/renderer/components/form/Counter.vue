@@ -16,6 +16,8 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex'
+
   export default {
     props: {
       label: String,
@@ -27,6 +29,11 @@
         default: 0
       },
       name: String
+    },
+    computed: {
+      ...mapState({
+        players: (state) => state.game.players
+      })
     },
     data () {
       return {
@@ -51,11 +58,11 @@
       }
     },
     mounted () {
-      if (this.min) this.value = this.min
+      if (this.players.length) this.value = this.players.length
     },
     watch: {
-      min () {
-        this.value = this.min
+      players () {
+        this.value = this.players.length
       }
     }
   }
