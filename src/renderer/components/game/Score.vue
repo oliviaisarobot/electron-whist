@@ -8,9 +8,12 @@
           img(src="../../assets/images/rounds.svg").round-counter-image
           div.round-text.animated.flipInX
             span {{ currentRound }}
+            div.game-type-name.animated.fadeIn
+              span "{{ ruleset.name }}"
         div(v-if="!showScores", :class="{ 'slideOutUp': showScores }" @click="showScores = true").score-toggle.animated.slideInDown Scoreboard
         div(v-if="currentRoundData.trump").trump-indicator.animated.lightSpeedIn
-          div
+          img(:src="cardSuit(currentRoundData.trump)").suit-image
+          div.suit-text
             span {{ currentRoundData.trump }}
         div.main-board
           div(v-if="stage === 'set_trump'").center-text.animated.slideInRight
@@ -71,6 +74,9 @@
       }
     },
     methods: {
+      cardSuit (trump) {
+        return require('@/assets/images/' + trump + '.svg')
+      },
       exitGame () {
         // TODO: prompt exit
         this.$router.push({ name: 'main-menu' })
@@ -132,6 +138,13 @@
     justify-content: center;
     margin-top: 20px;
     width: 100%;
+  }
+
+  .game-type-name {
+    color: #ffff33;
+    font-size: 20px;
+    margin-top: 20px;
+    text-align: center;
   }
 
   header {
@@ -212,11 +225,24 @@
     justify-content: center;
   }
 
+  .suit-image {
+    height: 140px;
+    width: 140px;
+  }
+
+  .suit-text {
+    color: #ffff33;
+    font-size: 18px;
+    margin-top: -15px;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
   .trump-indicator {
     position: absolute;
     right: 80px;
     text-align: center;
-    top: 40px;
+    top: 20px;
     width: 140px;
   }
 </style>
