@@ -27,6 +27,10 @@
         return this.ruleset.bid ? 3 : 2
       },
       scores () {
+        let metaScore = []
+        this.players.forEach((player) => {
+          metaScore[player] = 0
+        })
         let scores = []
         this.rounds.forEach((round) => {
           let line = []
@@ -34,9 +38,8 @@
             let bids = false
             if (this.ruleset.bid) bids = round.bids[player]; line.push(bids)
             line.push(round.takes[player])
-            let score = 0
-            if (round.takes.isSet) score = this.calcScore(round.takes[player], bids)
-            line.push(score)
+            if (round.takes.isSet) metaScore[player] += this.calcScore(round.takes[player], bids)
+            line.push(metaScore[player])
           })
           scores.push(line)
         })
@@ -47,13 +50,13 @@
       calcScore (takes, bids) {
         let diff = 0
         if (bids) diff = Math.abs(takes - bids)
-        if (this.ruleset.penalty && this.ruleset.bid) { // if penalty is true, bids must also be true
-          return diff === 0 ? takes * 10 + bids * 2 : -(diff * 2)
+        if (this.ruleset.penalty) { // if penalty is true, bids must also be true
+          return diff === 0 ? 10 + (bids * 2) : -(diff * 2)
         } else {
-          if (bids) { // no penalty, but correct bidding is rewarded
-            return diff === 0 ? takes * 10 + bids * 2 : takes * 10
+          if (this.ruleset.bid) { // no penalty, but correct bidding is rewarded
+            return diff === 0 ? 10 + (bids * 2) : takes * 2
           } else { // no penalty, and no bidding, highest take wins
-            return takes * 10
+            return takes * 2
           }
         }
       }
