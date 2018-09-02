@@ -51,16 +51,16 @@
     },
     methods: {
       calcScore (takes, bids) {
-        let diff = 0
-        if (bids) diff = Math.abs(takes - bids)
-        if (this.ruleset.penalty) { // if penalty is true, bids must also be true
+        let diff = null
+        if (bids !== false) diff = Math.abs(takes - bids)
+        if (this.ruleset.penalty && this.ruleset.bid) { // if penalty is true, bids must also be true
           return diff === 0 ? 10 + (bids * 2) : -(diff * 2)
-        } else {
-          if (this.ruleset.bid) { // no penalty, but correct bidding is rewarded
-            return diff === 0 ? 10 + (bids * 2) : takes * 2
-          } else { // no penalty, and no bidding, highest take wins
-            return takes * 2
-          }
+        }
+        if (!this.ruleset.penalty && this.ruleset.bid) { // no penalty, but correct bidding is rewarded
+          return diff === 0 ? 10 + (bids * 2) : takes * 2
+        }
+        if (!this.ruleset.penalty && !this.ruleset.bid) { // no penalty, and no bidding, highest take wins
+          return takes * 2
         }
       }
     }

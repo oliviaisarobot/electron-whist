@@ -21,7 +21,12 @@
           div(v-if="stage === 'set_bids'").center-text.animated.slideInRight
             set-bids(@set="stage = 'set_takes'")
           div(v-if="stage === 'set_takes'").center-text.animated.slideInRight
-            set-takes(@set="stage = 'round_end'")
+            div(v-if="playing")
+              div You are playing! Have fun and let me know when you are ready to set the takes!
+              div Also display current bids and flahs scores here!
+              div(@click="playing = false").primary-button.d-inline-block Set takes
+            div(v-else)
+              set-takes(@set="stage = 'round_end'")
           div(v-if="stage === 'round_end'").center-text.animated.slideInRight
             flash-scores.space-after
             div(@click="nextRound").primary-button.d-inline-block Next round
@@ -69,6 +74,7 @@
     },
     data () {
       return {
+        playing: true,
         showScores: false,
         stage: 'intro'
       }
@@ -98,6 +104,7 @@
       },
       initNewRound () {
         this.$store.commit('game/INIT_NEW_ROUND')
+        this.playing = true
       },
       nextRound () {
         this.$store.commit('game/INCREMENT_ROUND_COUNTER')
