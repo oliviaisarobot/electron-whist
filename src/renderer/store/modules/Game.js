@@ -2,7 +2,8 @@ const state = {
   code: 'a01',
   gamelist: [
     { code: 'a01', name: 'Rikiki' },
-    { code: 'a02', name: 'Bid Whist' }
+    { code: 'a02', name: 'Bid Whist' },
+    { code: 'a03', name: 'Simple Whist' }
   ],
   modes: [
     { name: 'ascending', description: 'In ascending mode, there are 15 rounds, the first one starting with a hand of one card, increasing each round until it reaches fifteen.', round_count: 15 },
@@ -38,7 +39,10 @@ const mutations = {
   INIT_NEW_ROUND (state) {
     if (state.gameData.rounds) {
       let roundData = {}
-      if (state.ruleset.bid) roundData.bids = {}; roundData.bids.isSet = false
+      if (state.ruleset.bid) {
+        roundData.bids = {}
+        roundData.bids.isSet = false
+      }
       roundData.takes = {}; roundData.takes.isSet = false
       state.players.forEach((player) => {
         if (state.ruleset.bid) roundData.bids[player] = 0

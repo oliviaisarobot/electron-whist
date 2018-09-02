@@ -1,0 +1,13 @@
+{
+  "code": "a02",
+  "name": "Simple Whist",
+  "description": "In the Bid Whist game type, players take tricks each round, highest taker wins.",
+  "player_count": {
+    "min": 2,
+    "max": 6
+  },
+  "bid": false,
+  "penalty": false,
+  "pair": false,
+  "perma_trump": false
+}

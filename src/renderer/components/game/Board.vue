@@ -10,7 +10,7 @@
         tbody
           tr(v-for="(value, index) in scores", :class="{ 'background-even': (scores.length - (index)) % 2 === 0 }").border-bottom
             td.text-center.border-right {{ scores.length - (index) }}
-            td(v-for="(v, i) in value", :class="{ 'mark border-right': (i + 1) % 3 === 0 }").text-center {{ v }}
+            td(v-for="(v, i) in value", :class="{ 'mark border-right': (i + 1) % colspan === 0 }").text-center {{ v }}
 </template>
 
 <script>
@@ -36,7 +36,10 @@
           let line = []
           this.players.forEach((player) => {
             let bids = false
-            if (this.ruleset.bid) bids = round.bids[player]; line.push(bids)
+            if (this.ruleset.bid) {
+              bids = round.bids[player]
+              line.push(bids)
+            }
             line.push(round.takes[player])
             if (round.takes.isSet) metaScore[player] += this.calcScore(round.takes[player], bids)
             line.push(metaScore[player])
