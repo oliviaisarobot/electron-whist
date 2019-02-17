@@ -5,7 +5,7 @@
       div(v-if="editNames").animated.fadeIn
         name-selection-component
         div.d-flex.align-center.justify-center.buttons
-          div(@click="editNames = false").primary-button Done
+          div(role="button" @click="editNames = false").primary-button Done
       div(v-else).animated.fadeIn
         rule-selection-component.space-after
         mode-selection-component.space-after
@@ -17,8 +17,8 @@
           @change="setPlayers($event)"
           ).space-after
         div.d-flex.align-center.justify-center.buttons
-          div(@click="editNames = true").secondary-button Edit names
-          div(@click="startGame").primary-button Start game
+          div(role="button" @click="editNames = true").secondary-button Edit names
+          div(role="button" @click="startGame").primary-button Start game
     footer-component
 </template>
 

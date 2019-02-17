@@ -46,6 +46,7 @@
 
   label {
     font-size: 18px;
+    width: 120px;
   }
 
   .margin-right {

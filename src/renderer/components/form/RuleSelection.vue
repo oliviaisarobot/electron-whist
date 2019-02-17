@@ -17,6 +17,7 @@
   export default {
     computed: {
       ...mapState({
+        code: (state) => state.game.code,
         gamelist: (state) => state.game.gamelist
       })
     },
@@ -28,7 +29,7 @@
     methods: {
       getGameType () {
         this.gamelist.forEach((game) => {
-          if (game.code === this.$store.state.game.code) this.gameType = game
+          if (game.code === this.code) this.gameType = game
         })
       },
       switchType (direction) {
