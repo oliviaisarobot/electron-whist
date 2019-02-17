@@ -1,10 +1,16 @@
 <template lang="pug">
   div#app
+    window-controls
     router-view
 </template>
 
 <script>
+  import WindowControls from '@/components/layout/WindowControls'
+
   export default {
+    components: {
+      WindowControls
+    },
     name: 'electron-whist'
   }
 </script>

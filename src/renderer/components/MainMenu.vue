@@ -4,7 +4,8 @@
       img(src="../assets/images/whist.svg")
     ul.nav-list.animated.fadeIn
       li(v-for="item in navItems").nav-item
-        router-link(:to="{ name: item.component }").nav-link {{ item.name }}
+        router-link(v-if="!item.disabled" :to="{ name: item.component }").nav-link {{ item.name }}
+        span(v-else).disabled {{ item.name }}
     div.version v0.7.1.
 </template>
 
@@ -13,9 +14,9 @@
     data () {
       return {
         navItems: [
-          { name: 'New game', component: 'game-setup' },
-          { name: 'High scores', component: 'high-scores' },
-          { name: 'Rules', component: 'rules' }
+          { name: 'New game', component: 'game-setup', disabled: false },
+          { name: 'High scores', component: 'high-scores', disabled: true },
+          { name: 'Rules', component: 'rules', disabled: true }
           // { name: 'Exit', component: 'rules' }
         ]
       }
@@ -42,10 +43,15 @@
     transition: .3s ease;
   }
 
-  .nav-link {
+  .nav-link, .disabled {
     color: white;
     font-size: 26px;
     transition: .3s ease;
+  }
+
+  .disabled {
+    color: #9c9c9c!important;
+    opacity: .5;
   }
 
   .nav-link:hover {
