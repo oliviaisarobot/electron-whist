@@ -21,7 +21,7 @@
     "postinstall": "npm run lint:fix"
   },
   "build": {
-    "productName": "electron-whist",
+    "productName": "Electron Whist",
     "appId": "org.simulatedgreg.electron-vue",
     "directories": {
       "output": "build"

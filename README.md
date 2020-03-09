@@ -2,6 +2,8 @@
 
 > Hackaton Project: A scorekeeping app for the popular risk-taking card game, Whist!
 
+![preview](https://github.com/oliviaisarobot/electron-whist/raw/master/download/preview.png)
+
 ## 1. What is Whist?
 
 Whist is a trick taking card game, played with a standard 52-card French card deck. Player number can vary between 2 and 6 depending on the game version, but it’s most commonly played by 4 people. In Hungary, it was popularized under the name "Rikiki". More info [here](https://en.wikipedia.org/wiki/Whist).
@@ -29,15 +31,15 @@ Might be extended in the future.
 ## 4. Original Hackaton goals
 
 * 4 main screens: menu, game mode selection, game, scoreboard
-* 7 game types: Rikiki, Pair Whist, Diminishing Whist, Bid Whist, Simple Whist, Spades, Oh hell!
-* 3 game modes: ascending, descending, pyramid
+* up to 7 game types: Rikiki, Pair Whist, Diminishing Whist, Bid Whist, Simple Whist, Spades, Oh hell!
+* up to 3 game modes: ascending, descending, pyramid
 
-nice to have:
+...and what didn't make the cut (yet):
 * high scores: store scores in a database
 
 ## 5. Download
 
-[v0.7.2.](https://github.com/oliviaisarobot/electron-whist/raw/master/download/electron-whist.zip)
+[Win v0.7.2.](https://github.com/oliviaisarobot/electron-whist/raw/master/download/Electron-Whist-Setup-0.7.2.7z)
 
 ## 6. ...or tinker with it yourself!
 
