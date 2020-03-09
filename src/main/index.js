@@ -28,7 +28,7 @@ function createWindow () {
     movable: true,
     titleBarStyle: 'hidden',
     webPreferences: {
-      devTools: false
+      devTools: false // change this to debug
     },
     width: 1000
   })

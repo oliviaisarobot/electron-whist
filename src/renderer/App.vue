@@ -16,6 +16,16 @@
 </script>
 
 <style>
+
+  @font-face {
+    font-family: 'Baloo Tammudu';
+    font-style: normal;
+    font-weight: 400;
+    src: local('Baloo Tammudu'),
+         local('BalooTammudu-Regular'),
+         url('./assets/fonts/BalooTammudu-Regular.ttf') format('truetype');
+  }
+  
   html, body {
     margin: 0;
     overflow: hidden;

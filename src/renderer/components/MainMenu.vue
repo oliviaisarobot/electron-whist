@@ -6,7 +6,7 @@
       li(v-for="item in navItems").nav-item
         router-link(v-if="!item.disabled" :to="{ name: item.component }").nav-link {{ item.name }}
         span(v-else).disabled {{ item.name }}
-    div.version v0.7.1.
+    div.version v0.7.2.
 </template>
 
 <script>
